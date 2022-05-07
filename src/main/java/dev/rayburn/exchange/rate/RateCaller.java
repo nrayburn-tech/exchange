@@ -37,6 +37,7 @@ public class RateCaller {
 					} catch (JsonProcessingException e) {
 						throw new RuntimeException(e);
 					}
-				});
+				})
+				.retry(3);
 	}
 }

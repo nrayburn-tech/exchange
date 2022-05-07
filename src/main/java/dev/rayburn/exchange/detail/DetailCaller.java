@@ -21,7 +21,8 @@ public class DetailCaller {
 				.get()
 				.uri("/currency-api@{apiVersion}/other/Common-Currency.json", 1)
 				.retrieve()
-				.bodyToMono(new StringDetailMap());
+				.bodyToMono(new StringDetailMap())
+				.retry(3);
 	}
 
 	public Mono<Map<String, String>> getSupportedCurrencyMap() {
@@ -29,7 +30,8 @@ public class DetailCaller {
 				.get()
 				.uri("/currency-api@{apiVersion}/other/currencies.json", 1)
 				.retrieve()
-				.bodyToMono(new StringStringMap());
+				.bodyToMono(new StringStringMap())
+				.retry(3);
 	}
 
 	private static class StringDetailMap extends ParameterizedTypeReference<Map<String, Detail>> {
