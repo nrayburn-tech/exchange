@@ -3,17 +3,19 @@ package dev.rayburn.exchange.rate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
 public class RateCaller {
-	@Autowired
-	private WebClient currencyWebClient;
-	@Autowired
-	private ObjectMapper objectMapper;
+	private final WebClient currencyWebClient;
+	private final ObjectMapper objectMapper;
+
+	public RateCaller(WebClient currencyWebClient, ObjectMapper objectMapper) {
+		this.currencyWebClient = currencyWebClient;
+		this.objectMapper = objectMapper;
+	}
 
 	/**
 	 * @param currency - The currency code to use.
